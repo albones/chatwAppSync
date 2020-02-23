@@ -1,0 +1,24 @@
+type Room @model {
+  id: ID!
+  createdAt: String
+  updatedAt: String
+  messages: [Message] @connection(name: "RoomMessages", keyField: "roomId", sortField: "when")
+}
+
+type Message
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      {allow: owner, ownerField: "owner", mutations: [create, update, delete]},
+  ]) {
+  id: ID!
+  content: String!
+  when: String!
+  roomId: ID
+  owner: String
+  room: Room @connection(name: "RoomMessages", keyField: "roomId")
+}
+
+type Subscription {
+  onCreateMessage(roomId: ID!): Message @aws_subscribe(mutations: ["createMessage"])
+}

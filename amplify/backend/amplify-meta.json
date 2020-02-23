@@ -1,0 +1,62 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-chatapp-dev-104648-authRole",
+			"UnauthRoleArn": "arn:aws:iam::745641015630:role/amplify-chatapp-dev-104648-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::745641015630:role/amplify-chatapp-dev-104648-authRole",
+			"Region": "us-west-2",
+			"DeploymentBucketName": "amplify-chatapp-dev-104648-deployment",
+			"UnauthRoleName": "amplify-chatapp-dev-104648-unauthRole",
+			"StackName": "amplify-chatapp-dev-104648",
+			"StackId": "arn:aws:cloudformation:us-west-2:745641015630:stack/amplify-chatapp-dev-104648/4de53420-559b-11ea-a475-0688c4290cb8",
+			"AmplifyAppId": "daafx84ta4ahq"
+		}
+	},
+	"auth": {
+		"chatappd8ddf123": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-chatapp-dev-104648-deployment/amplify-cfn-templates/auth/chatappd8ddf123-cloudformation-template.yml",
+				"logicalId": "authchatappd8ddf123"
+			},
+			"lastPushTimeStamp": "2020-02-22T23:43:30.318Z",
+			"output": {
+				"AppClientSecret": "1b53g2494n67hbs84n1o5e65e1uoegm4p880rvuseu4437tatve5",
+				"UserPoolId": "us-west-2_5CCbd8H1R",
+				"AppClientIDWeb": "2gq3f9887krk0t1qkjvbapq4pk",
+				"AppClientID": "1at3r6upe5jg3b4nmptemk8qdd",
+				"IdentityPoolId": "us-west-2:22ad3a45-0c50-4cd3-aeca-ee139835a84b",
+				"IdentityPoolName": "chatappd8ddf123_identitypool_d8ddf123__dev",
+				"UserPoolName": "chatappd8ddf123_userpool_d8ddf123"
+			},
+			"lastPushDirHash": "Fk4YzF9QbkiZ5gELqmvrrrFnT8c="
+		}
+	},
+	"api": {
+		"chatapp": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authchatappd8ddf123"
+						}
+					}
+				},
+				"GraphQLAPIIdOutput": "6ef4p5mhv5d5phpr6cj5kbur7e",
+				"GraphQLAPIEndpointOutput": "https://ni4vxhw3gvfetdnrela7af2szy.appsync-api.us-west-2.amazonaws.com/graphql"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-chatapp-dev-104648-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apichatapp"
+			},
+			"lastPushTimeStamp": "2020-02-22T23:43:30.318Z",
+			"lastPushDirHash": "m9a3Aq9mhxW/hu0yiYN8cogQRpI="
+		}
+	}
+}

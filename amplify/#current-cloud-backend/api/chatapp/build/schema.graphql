@@ -1,0 +1,200 @@
+type Room {
+  id: ID!
+  messages(filter: ModelMessageFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMessageConnection
+}
+
+type Message {
+  id: ID!
+  content: String!
+  when: String!
+  roomId: ID
+  room: Room
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelRoomConnection {
+  items: [Room]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelRoomFilterInput {
+  id: ModelIDInput
+  and: [ModelRoomFilterInput]
+  or: [ModelRoomFilterInput]
+  not: ModelRoomFilterInput
+}
+
+type Query {
+  getRoom(id: ID!): Room
+  listRooms(filter: ModelRoomFilterInput, limit: Int, nextToken: String): ModelRoomConnection
+  getMessage(id: ID!): Message
+  listMessages(filter: ModelMessageFilterInput, limit: Int, nextToken: String): ModelMessageConnection
+}
+
+input CreateRoomInput {
+  id: ID
+}
+
+input UpdateRoomInput {
+  id: ID!
+}
+
+input DeleteRoomInput {
+  id: ID
+}
+
+type Mutation {
+  createRoom(input: CreateRoomInput!, condition: ModelRoomConditionInput): Room
+  updateRoom(input: UpdateRoomInput!, condition: ModelRoomConditionInput): Room
+  deleteRoom(input: DeleteRoomInput!, condition: ModelRoomConditionInput): Room
+  createMessage(input: CreateMessageInput!, condition: ModelMessageConditionInput): Message
+  updateMessage(input: UpdateMessageInput!, condition: ModelMessageConditionInput): Message
+  deleteMessage(input: DeleteMessageInput!, condition: ModelMessageConditionInput): Message
+}
+
+input ModelRoomConditionInput {
+  and: [ModelRoomConditionInput]
+  or: [ModelRoomConditionInput]
+  not: ModelRoomConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreateRoom: Room @aws_subscribe(mutations: ["createRoom"])
+  onUpdateRoom: Room @aws_subscribe(mutations: ["updateRoom"])
+  onDeleteRoom: Room @aws_subscribe(mutations: ["deleteRoom"])
+  onCreateMessage: Message @aws_subscribe(mutations: ["createMessage"])
+  onUpdateMessage: Message @aws_subscribe(mutations: ["updateMessage"])
+  onDeleteMessage: Message @aws_subscribe(mutations: ["deleteMessage"])
+}
+
+type ModelMessageConnection {
+  items: [Message]
+  nextToken: String
+}
+
+input ModelMessageFilterInput {
+  id: ModelIDInput
+  content: ModelStringInput
+  when: ModelStringInput
+  roomId: ModelIDInput
+  and: [ModelMessageFilterInput]
+  or: [ModelMessageFilterInput]
+  not: ModelMessageFilterInput
+}
+
+input CreateMessageInput {
+  id: ID
+  content: String!
+  when: String!
+  roomId: ID
+}
+
+input UpdateMessageInput {
+  id: ID!
+  content: String
+  when: String
+  roomId: ID
+}
+
+input DeleteMessageInput {
+  id: ID
+}
+
+input ModelMessageConditionInput {
+  content: ModelStringInput
+  when: ModelStringInput
+  roomId: ModelIDInput
+  and: [ModelMessageConditionInput]
+  or: [ModelMessageConditionInput]
+  not: ModelMessageConditionInput
+}
