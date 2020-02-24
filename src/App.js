@@ -3,6 +3,7 @@ import AWSAppSyncClient from "aws-appsync";
 import Amplify, { Auth } from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react";
 import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import { Rehydrated } from "aws-appsync-react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import AppSyncConfig from "./aws-exports";
