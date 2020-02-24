@@ -12,6 +12,10 @@ import Rooms from "./Rooms";
 import ChatWithData from "./ChatWithData";
 
 
+
+
+
+
 Amplify.configure(AppSyncConfig);
 
 const client = new AWSAppSyncClient({
@@ -30,6 +34,7 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
+        <ApolloHooksProvider client={client}>
         <Rehydrated>
           <Router>
             <Switch>
@@ -38,6 +43,7 @@ class App extends Component {
             </Switch>
           </Router>
         </Rehydrated>
+        </ApolloHooksProvider>
       </ApolloProvider>
     );
   }
